@@ -1,0 +1,272 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Las 6 Tumbas de Tom</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: Georgia, serif;
+    color: white;
+    text-align: center;
+    background:
+        radial-gradient(ellipse at top, #393052 0%, #171323 48%, #08090d 100%);
+}
+
+header {
+    padding: 22px 12px 8px;
+}
+
+h1 {
+    color: #ffad45;
+    font-size: clamp(28px, 6vw, 48px);
+    text-shadow: 0 0 16px #a34213;
+    margin: 8px 0;
+}
+
+h2 {
+    color: #e6c4ff;
+}
+
+p {
+    line-height: 1.6;
+}
+
+.panel {
+    width: min(92%, 750px);
+    margin: 18px auto;
+    padding: 25px 18px;
+    border: 2px solid #76519a;
+    border-radius: 20px;
+    background: rgba(12, 10, 22, 0.88);
+    box-shadow: 0 0 28px #5e267766;
+}
+
+.tom {
+    font-size: 95px;
+    margin: 12px;
+    animation: flotar 2s infinite ease-in-out;
+}
+
+@keyframes flotar {
+    50% { transform: translateY(-8px); }
+}
+
+button {
+    cursor: pointer;
+    font-size: 17px;
+    font-weight: bold;
+    padding: 14px 22px;
+    border: 0;
+    border-radius: 12px;
+    margin: 8px;
+    color: #21142b;
+    background: linear-gradient(135deg, #ffcf78, #ff8c42);
+    box-shadow: 0 4px 14px #0008;
+}
+
+button:hover {
+    transform: scale(1.04);
+}
+
+#cementerio {
+    display: none;
+}
+
+.tumbas {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+    margin: 25px auto;
+}
+
+.tumba {
+    min-height: 145px;
+    padding: 15px 5px;
+    border: 2px solid #74617e;
+    border-radius: 48% 48% 12px 12px;
+    background: linear-gradient(#51445d, #211b2a);
+    color: white;
+    font-size: 15px;
+}
+
+.tumba .simbolo {
+    display: block;
+    font-size: clamp(36px, 8vw, 57px);
+    margin-bottom: 8px;
+}
+
+.tumba:disabled {
+    cursor: default;
+    opacity: 0.8;
+}
+
+#resultado {
+    display: none;
+    margin-top: 25px;
+    padding: 20px;
+    border-radius: 15px;
+    border: 2px solid #ffad45;
+    background: #211629;
+}
+
+.whatsapp {
+    display: inline-block;
+    padding: 14px 20px;
+    margin-top: 12px;
+    border-radius: 12px;
+    background: #20c866;
+    color: white;
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.nota {
+    color: #c9bfd2;
+    font-size: 13px;
+}
+
+@media (max-width: 480px) {
+    .tumbas { gap: 7px; }
+    .tumba { min-height: 120px; padding: 10px 2px; }
+    .panel { padding: 18px 12px; }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>🎃 LAS 6 TUMBAS DE TOM 🎃</h1>
+    <p>Una noche de Halloween... algo te espera en el cementerio.</p>
+</header>
+
+<section id="inicio" class="panel">
+    <div class="tom">🐈</div>
+    <h2>Una noche de terror...</h2>
+    <p>
+        Tom salió a recorrer el vecindario para pedir dulces.
+        Pero una niebla espesa cubrió el camino y Tom se perdió.
+    </p>
+    <p>
+        Al atravesar unos árboles, encontró un viejo cementerio.
+        Frente a él aparecieron seis tumbas misteriosas...
+    </p>
+    <p><strong>¿Te animás a descubrir qué esconde una de ellas?</strong></p>
+    <button onclick="iniciar()">👻 ENTRAR AL CEMENTERIO</button>
+</section>
+
+<section id="cementerio" class="panel">
+    <h2>🪦 Elegí una tumba...</h2>
+    <p>Tom tiene una sola oportunidad. ¿Cuál esconderá tu premio?</p>
+
+    <div class="tumbas">
+        <button class="tumba" onclick="elegir(0)">
+            <span class="simbolo">🪦</span>Tumba 1
+        </button>
+        <button class="tumba" onclick="elegir(1)">
+            <span class="simbolo">🪦</span>Tumba 2
+        </button>
+        <button class="tumba" onclick="elegir(2)">
+            <span class="simbolo">🪦</span>Tumba 3
+        </button>
+        <button class="tumba" onclick="elegir(3)">
+            <span class="simbolo">🪦</span>Tumba 4
+        </button>
+        <button class="tumba" onclick="elegir(4)">
+            <span class="simbolo">🪦</span>Tumba 5
+        </button>
+        <button class="tumba" onclick="elegir(5)">
+            <span class="simbolo">🪦</span>Tumba 6
+        </button>
+    </div>
+
+    <div id="resultado">
+        <div style="font-size:65px">🎉</div>
+        <h2>¡DESCUBRISTE TU PREMIO!</h2>
+        <p id="premio"></p>
+        <a class="whatsapp"
+           href="https://wa.link/v2txxr"
+           target="_blank"
+           rel="noopener">
+           💚 RECLAMAR PREMIO
+        </a>
+    </div>
+
+    <p class="nota">🎃 Comunidad Tom te desea mucha suerte 🎃</p>
+</section>
+
+<script>
+const premios = [
+    "500 fichas",
+    "1000 fichas",
+    "10% de bonificación",
+    "15% de bonificación",
+    "25% de bonificación",
+    "30% de bonificación"
+];
+
+const clave = "cementerioTomPremioV1";
+
+function iniciar() {
+    document.getElementById("inicio").style.display = "none";
+    document.getElementById("cementerio").style.display = "block";
+
+    const anterior = localStorage.getItem(clave);
+
+    if (anterior !== null) {
+        mostrarPremio(Number(anterior), true);
+    }
+}
+
+function elegir(numero) {
+    if (localStorage.getItem(clave) !== null) {
+        mostrarPremio(Number(localStorage.getItem(clave)), true);
+        return;
+    }
+
+    const orden = [...premios];
+    orden.sort(() => Math.random() - 0.5);
+
+    const premioElegido = orden[numero];
+
+    const indice = premios.indexOf(premioElegido);
+    localStorage.setItem(clave, String(indice));
+
+    document.querySelectorAll(".tumba").forEach(boton => {
+        boton.disabled = true;
+    });
+
+    mostrarPremio(indice, false);
+}
+
+function mostrarPremio(indice, repetido) {
+    document.getElementById("resultado").style.display = "block";
+
+    document.getElementById("premio").textContent =
+        (repetido
+            ? "Ya participaste. Tu premio guardado es: "
+            : "¡La tumba reveló: ") + premios[indice] + "!";
+
+    document.querySelectorAll(".tumba").forEach(boton => {
+        boton.disabled = true;
+    });
+
+    document.getElementById("resultado").scrollIntoView({
+        behavior: "smooth",
+        block: "center"
+    });
+}
+</script>
+
+</body>
+</html>
